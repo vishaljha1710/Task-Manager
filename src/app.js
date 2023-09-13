@@ -92,6 +92,7 @@ app.post("/register",async (req,res)=>{
             age:req.body.age
            })
            const token= await registeremployee.generatetoken();
+           //    console.log(token);
            await registeremployee.save();
            res.status(201).render("index");
      }
