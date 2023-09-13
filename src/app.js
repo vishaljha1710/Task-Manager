@@ -54,7 +54,12 @@ app.post("/login", async (req,res)=>{
    
    const user= await Register.findOne({username:username});
 
-   const token=user.generatetoken();
+   const token=await user.generatetoken();
+//    console.log(token);
+   res.cookie("jwt",token,{
+    expires:new Date(Date.now()+60000),
+    httpOnly:true
+   });
 
    if(await bcrypt.compare(password,user.password)){
     res.render("dashboard");
@@ -86,7 +91,7 @@ app.post("/register",async (req,res)=>{
             phone:req.body.phone,
             age:req.body.age
            })
-           const token=registeremployee.generatetoken();
+           const token= await registeremployee.generatetoken();
            await registeremployee.save();
            res.status(201).render("index");
      }
