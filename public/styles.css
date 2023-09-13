@@ -1,0 +1,52 @@
+body {
+    background-image: url(mountain.jpg);
+
+    /* You may add things like width, height, background-size... */
+}
+*{
+    font-size: 20px;
+  }
+
+  a {
+    text-decoration: none;
+    color: bisque;
+}
+a:hover {
+   color: brown;
+}
+  .text{
+           position: absolute; /*or fixed*/
+           top: 200px;
+           left: 50px;
+           max-width: 800px;
+          }
+           h1 {
+              font-size: 48px;
+              margin-bottom: 20px;
+          }
+  
+          p {
+              font-size: 28px;
+              line-height: 1.5;
+          }
+          #blackBar{
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:60px;
+            background-color:black;
+         }
+         .navleft,.navright{
+            position: fixed;
+            top:10px;
+            color: white;
+         }
+         .navleft{
+            font-size: 30px;
+            left: 20px;
+         }
+         .navright{
+            font-size: 25px;
+            right: 20px;
+         }
