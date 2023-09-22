@@ -7,8 +7,12 @@ const path=require('path');
 const port= process.env.PORT||3000;
 const hbs=require('hbs');
 const Register=require('./models/registration');
+const cookieParser = require('cookie-parser');
 
+const auth=require('./middleware/auth');
 
+//global profile name for all pages 
+var name="";
 
 app.listen(port,()=>{
     console.log(`Server is running on : ${port}`);
@@ -22,6 +26,7 @@ const partials_path=path.join(__dirname,"../templates/partials");
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+app.use(cookieParser());
 
 app.use(express.static(static_path));
 app.set("view engine","hbs");
@@ -31,7 +36,7 @@ hbs.registerPartials(partials_path);
 
 
 app.get("",(req,res)=>{
-    res.render("index");
+    res.render("index",{name:name});
     
 })
 //backup response
@@ -57,12 +62,12 @@ app.post("/login", async (req,res)=>{
    const token=await user.generatetoken();
 //    console.log(token);
    res.cookie("jwt",token,{
-    expires:new Date(Date.now()+60000),
+    expires:new Date(Date.now()+600000),
     httpOnly:true
    });
-
+   name=user.username;
    if(await bcrypt.compare(password,user.password)){
-    res.render("dashboard");
+    res.render("dashboard",{name:name});
    }
    else{
     res.send("invalid credentials");
@@ -74,8 +79,33 @@ app.post("/login", async (req,res)=>{
    }
     
 })
+app.get("/logout",auth,async(req,res)=>{
+    try{
+        res.clearCookie("jwt");
+  
+        // logout for single token or one device
+        // req.user.tokens=req.user.tokens.filter((currelement)=>{
+        //     return currelement.token!==req.token;
+        // })
+        
+        // logout from all devices
+        req.user.tokens=[];
+        name="";
+        console.log("logout succsessfull");
+        
+        await req.user.save()
+       
+        res.render("login");
+
+    }
+    catch(e){console.log(e);
+        // res.status(404).send(e);
+    }
+
+    
+})
 app.get("/about",(req,res)=>{
-    res.render("about");
+    res.render("about",{name:name});
     
 })
 app.post("/register",async (req,res)=>{
@@ -94,7 +124,7 @@ app.post("/register",async (req,res)=>{
            const token= await registeremployee.generatetoken();
            //    console.log(token);
            await registeremployee.save();
-           res.status(201).render("index");
+           res.status(201).render("login");
      }
      else{
         res.end("password not matching");
