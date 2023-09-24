@@ -67,7 +67,7 @@ app.post("/login", async (req,res)=>{
    });
    name=user.username;
    if(await bcrypt.compare(password,user.password)){
-    res.render("dashboard",{name:name});
+    res.render("dashboard",{name:name,logout:"logout"});
    }
    else{
     res.send("invalid credentials");
