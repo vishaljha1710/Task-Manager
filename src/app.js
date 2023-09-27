@@ -8,11 +8,17 @@ const port= process.env.PORT||3000;
 const hbs=require('hbs');
 const Register=require('./models/registration');
 const cookieParser = require('cookie-parser');
-
+const homeverify=require('./middleware/homeverify');
 const auth=require('./middleware/auth');
+const { register } = require('module');
 
-//global profile name for all pages 
-var name="";
+hbs.registerHelper('eq', function (a, b, options) {
+    if (a === b) {
+      return true;
+    } else {
+      return false;
+    }
+  }); 
 
 app.listen(port,()=>{
     console.log(`Server is running on : ${port}`);
@@ -35,8 +41,8 @@ hbs.registerPartials(partials_path);
 
 
 
-app.get("",(req,res)=>{
-    res.render("index",{name:name});
+app.get("",homeverify,(req,res)=>{
+    res.render("index",{name:req.user.username});
     
 })
 //backup response
@@ -44,10 +50,51 @@ app.get("",(req,res)=>{
     res.send('hello');
     
 })
+app.get("/dashboard",auth,async (req,res)=>{
+
+    res.render("dashboard",{name:req.user.username ,user:req.user});
+    
+})
+app.post("/dashboard",auth,async (req,res)=>{
+
+    const user=req.user;
+    var record={};
+    //updating the database
+    if(req.body.op==1){
+     record= await Register.findOneAndUpdate(
+        { _id: user._id, 'dashboard.tasks': req.body.text }, // Query to find the document and element
+        { $set: { 'dashboard.$.box': req.body.box } }, // Update operation
+        { new: true }, // Return the modified document
+        );
+        
+        }
+        else if(req.body.op==0){
+
+            record= await Register.findOneAndUpdate(
+                { _id: user._id }, // Query to find the document and element
+                { $push: { 'dashboard': {box:"Tasks",tasks:req.body.text} } }, // Update operation
+                { new: true }, // Return the modified document
+                );
+        }
+        else{
+            record = await Register.findOneAndUpdate(
+                { _id: user._id, 'dashboard.tasks': req.body.text }, // Query to find the document and element
+                { $pull: { 'dashboard': { tasks: req.body.text, box: req.body.box } } }, // Update operation
+                { new: true }, // Return the modified document
+              );
+                
+        }
+
+        console.log(record);
+
+
+    
+})
 app.get("/register",(req,res)=>{
     res.render("register");
     
 })
+
 app.get("/login",(req,res)=>{
     res.render("login");
     
@@ -67,7 +114,8 @@ app.post("/login", async (req,res)=>{
    });
    name=user.username;
    if(await bcrypt.compare(password,user.password)){
-    res.render("dashboard",{name:name,logout:"logout"});
+    module.exports=user;
+    res.render("index",{name:name });
    }
    else{
     res.send("invalid credentials");
@@ -90,7 +138,6 @@ app.get("/logout",auth,async(req,res)=>{
         
         // logout from all devices
         req.user.tokens=[];
-        name="";
         console.log("logout succsessfull");
         
         await req.user.save()
@@ -99,13 +146,13 @@ app.get("/logout",auth,async(req,res)=>{
 
     }
     catch(e){console.log(e);
-        // res.status(404).send(e);
+         res.status(404).send(e);
     }
 
     
 })
-app.get("/about",(req,res)=>{
-    res.render("about",{name:name});
+app.get("/about",auth,(req,res)=>{
+    res.render("about",{name:req.user.username});
     
 })
 app.post("/register",async (req,res)=>{
@@ -119,11 +166,11 @@ app.post("/register",async (req,res)=>{
             password:req.body.password,
             confirmpassword:req.body.confirmpassword,
             phone:req.body.phone,
-            age:req.body.age
+            age:req.body.age,
            })
            const token= await registeremployee.generatetoken();
            //    console.log(token);
-           await registeremployee.save();
+  
            res.status(201).render("login");
      }
      else{
@@ -131,7 +178,9 @@ app.post("/register",async (req,res)=>{
      }
   }
   catch(error){
+    console.log(error);
       res.send("email or phone no already in use");
+      
   }
     
 })

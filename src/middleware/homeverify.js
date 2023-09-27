@@ -1,7 +1,7 @@
 const register = require('../models/registration');
 const jwt=require('jsonwebtoken');
 
-const auth= async(req,res,next)=>{
+const homeverify= async(req,res,next)=>{
     try{
         const token = req.cookies.jwt;
         const verifyuser = jwt.verify(token,process.env.SECRET_KEY);
@@ -14,10 +14,10 @@ const auth= async(req,res,next)=>{
     }
     catch(e){
         console.log(e);
-        res.render("../../templates/views/login.hbs");
+        res.render("../../templates/views/index.hbs");
     }
 
 
 }
 
-module.exports=auth;
+module.exports=homeverify;

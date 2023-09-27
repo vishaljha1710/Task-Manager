@@ -13,9 +13,11 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">{{this.name}}</a>
         </li>
+        {{# if this.name}}
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="logout">{{this.logout}}</a>
+          <a class="nav-link active" aria-current="page" href="logout">logout</a>
         </li>
+        {{/if}}
         <li class="nav-item">
           <a class="nav-link" href="about">about</a>
         </li>

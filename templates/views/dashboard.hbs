@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard</title>
       <link rel="stylesheet" href="styles.css">
-     {{>navbar name=name logout=logout}}
+     {{>navbar name=name }}
   <style>
     *{
       font-family: 'Poppins',sans-serif;
@@ -19,8 +19,8 @@
       color: white;
     }
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+ <h2></h2>
   </head>
 <body>
   <div class="search-bar">
@@ -28,16 +28,26 @@
         <button type="submit" id="add">Add</button>
     </div>
  <div class="container">
- <div id="left" class="faded"><h1> Tasks <img src="task.png" width="50" height="45"></h1>
- <div class="list" draggable="true"><img class="bulletin" src="bulletin.png"/>Demo</div>
+ <div id="left" class="faded"><h1> Tasks <img src="task.png"  width="50" height="45"></h1>
+ {{#each user.dashboard}}
+{{#if (eq this.box "Tasks")}}
+ <div class="list" draggable="true" ><img class="bulletin" draggable="false" src="bulletin.png"/>{{this.tasks}}<img class="delete" draggable="false" id="delete" src="delete.png"/></div>{{else}}{{/if}}{{/each}}
  </div>
- <div id="middle" class="faded"><h1>In Progress <img src="progress.png" width="50" height="45"></h1></div>
- <div id="right" class="faded"><h1>Completed <img src="completed.png" width="50" height="45"></h1></div>
+ 
+ <div id="middle" class="faded"><h1>In Progress <img src="progress.png" width="50" height="45"></h1>{{#each user.dashboard}}
+{{#if (eq this.box "In Progress")}}
+ <div class="list" draggable="true" ><img class="bulletin" draggable="false" src="bulletin.png"/>{{this.tasks}}<img class="delete" draggable="false" id="delete" src="delete.png"/></div>{{else}}{{/if}}{{/each}}
+ 
  </div>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
- <script src="script.js">
+ <div id="right" class="faded"><h1 id="h1">Completed <img src="completed.png" width="50" height="45"></h1>{{#each user.dashboard}}
+{{#if (eq this.box "Completed")}}
+ <div class="list" draggable="true" ><img class="bulletin" draggable="false" src="bulletin.png"/>{{this.tasks}}<img class="delete" draggable="false" id="delete" src="delete.png"/></div>{{else}}{{/if}}{{/each}}
+ </div>
+ </div>
+<script type="application/json" data-json="user">
 
- </script>
+</script>
+ <script src="script.js"></script>
  
 
 </body>

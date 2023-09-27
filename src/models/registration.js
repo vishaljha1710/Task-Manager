@@ -32,13 +32,28 @@ const classSchema= new mongoose.Schema({
             type:Number,
             required:true,
         },
+        total:{
+            type:Number,
+            default:0
+        },
+
         tokens:[{
             token:{
                 type: String,
                 required:true,
             }
-        }]
-
+        }],
+        dashboard:[{
+            box:{
+                type:String
+            },
+            tasks:{
+                type:String,
+                default: 0
+            },
+          
+        }],
+        
    
 });
 try{
