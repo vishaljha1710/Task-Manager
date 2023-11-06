@@ -14,6 +14,7 @@ const homeverify= async(req,res,next)=>{
     }
     catch(e){
         console.log(e);
+        
         res.render("../../templates/views/index.hbs");
     }
 

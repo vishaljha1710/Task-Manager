@@ -121,8 +121,7 @@ a:hover {
    flex: 1; /* Take up remaining space */
    padding: 10px;
    color: white;
-   border: none;
-   outline: none;
+
    background: transparent;
 }
 
@@ -141,3 +140,46 @@ a:hover {
 .search-bar button:hover {
    background-color: #ebb2b2;
 }
+.rcorners {
+   background-image: url("animebg.jpg");
+   background-size: cover;
+ border-radius: 25px;
+ padding: 20px;
+ width: 1100px;
+ height: 700px;
+ margin-left: auto;
+ margin-right: auto;
+ margin-top: 100px;
+ position:relative;
+}
+
+.form-container {
+           position: relative;
+           margin-left: auto;
+           margin-right: auto;
+           padding: 20px;
+           max-width:80%;
+           border-radius: 10px;
+           
+       }
+
+       /* Style form elements as needed */
+       .custform {
+           display: flex;
+           flex-direction: column ;
+       }
+
+      h2, label {
+           color: white;
+           margin-bottom: 10px;
+       }
+
+       input[type="email"],
+       input[type="password"],
+       .custbutton {
+           padding: 10px;
+           margin-bottom: 10px;
+          
+           border: 1px solid #ccc;
+           border-radius: 5px;
+       }

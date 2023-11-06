@@ -42,7 +42,10 @@ hbs.registerPartials(partials_path);
 
 
 app.get("",homeverify,(req,res)=>{
-    res.render("index",{name:req.user.username});
+    try{res.render("index",{name:req.user.username});}
+    catch(e){
+        res.render("index");
+    }
     
 })
 //backup response
@@ -112,18 +115,16 @@ app.post("/login", async (req,res)=>{
     expires:new Date(Date.now()+600000),
     httpOnly:true
    });
-   name=user.username;
    if(await bcrypt.compare(password,user.password)){
     module.exports=user;
-    res.render("index",{name:name });
+    res.render("index",{name:user.username});
    }
    else{
-    res.send("invalid credentials");
+    res.render("login",{error:"invalid credential"});
    }
 }
    catch(e){
-    res.status(400).send('Invalid Credentials');
-    console.log(e);
+    res.render("login",{error:"invalid credential"});
    }
     
 })
@@ -138,7 +139,7 @@ app.get("/logout",auth,async(req,res)=>{
         
         // logout from all devices
         req.user.tokens=[];
-        console.log("logout succsessfull");
+        console.log("logout succsessfull!!");
         
         await req.user.save()
        
