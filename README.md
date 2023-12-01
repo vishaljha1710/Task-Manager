@@ -49,7 +49,7 @@ To set up and run the Task Manager website on your local machine, follow these s
 
    - Create a MongoDB Atlas account if you don't have one.
    - Create a cluster and configure your database.
-   - Create a `.env` file in the project root directory and add your MongoDB Atlas connection string:
+   - Create a `.env` file in the project root directory and add your custom jwt token SECRET_KEY:
 
      ```env
      MONGODB_URI=your_mongodb_atlas_connection_string
@@ -58,7 +58,7 @@ To set up and run the Task Manager website on your local machine, follow these s
 5. Start the application:
 
    ```bash
-   npm start
+   npm run start
    ```
 
 The website should be accessible at `http://localhost:3000`.
@@ -92,14 +92,11 @@ The website should be accessible at `http://localhost:3000`.
 ## Folder Structure
 
 The project folder structure is organized as follows:
-
-- `config`: Configuration files for Passport.js and database connection.
 - `models`: MongoDB database models.
-- `routes`: Express routes for different functionalities.
-- `views`: EJS templates for rendering the website.
+- `views`: HBS templates for rendering the website.
 - `public`: Static files (CSS, JavaScript, images).
-- `controllers`: Controllers for handling user tasks and authentication.
-- `middlewares`: Custom middleware functions.
+- `db`: Mongodb connection to database.
+- `middlewares`: Custom middleware functions for authorization.
 
 ## License
 
