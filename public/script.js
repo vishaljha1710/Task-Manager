@@ -70,8 +70,11 @@ $(document).ready(function () {
 
 
 
-
+//to ensure the existing elements have drag and drop feature enabled
+//when the page reload the tasks are loaded from database with just the content
+//the tasks dont have the draganddrop() appended to them
   dragAndDrop();
+//
 
   function dragAndDrop() {
       $(".list").on("dragstart", function (e) {
