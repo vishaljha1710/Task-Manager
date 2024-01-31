@@ -94,14 +94,15 @@ app.post("/login", async (req, res) => {
 
     const user = await Register.findOne({ username: username });
 
-    const token = await user.generatetoken();
     //    console.log(token);
-    res.cookie("jwt", token, {
-      expires: new Date(Date.now() + 600000),
-      httpOnly: true,
-    });
+
+    // module.exports = user;
     if (await bcrypt.compare(password, user.password)) {
-      module.exports = user;
+      const token = await user.generatetoken();
+      res.cookie("jwt", token, {
+        expires: new Date(Date.now() + 600000),
+        httpOnly: true,
+      });
       res.render("index", { name: user.username });
     } else {
       res.render("login", { error: "invalid credential" });
@@ -131,8 +132,8 @@ app.get("/logout", auth, async (req, res) => {
     res.status(404).send(e);
   }
 });
-app.get("/about", auth, (req, res) => {
-  res.render("about", { name: req.user.username });
+app.get("/about", (req, res) => {
+  res.render("about");
 });
 app.post("/register", async (req, res) => {
   try {
