@@ -9,6 +9,7 @@ const hbs = require("hbs");
 const Register = require("./models/registration");
 const cookieParser = require("cookie-parser");
 const homeverify = require("./middleware/homeverify");
+const aboutauth = require("./middleware/aboutauth");
 const auth = require("./middleware/auth");
 const { register } = require("module");
 
@@ -132,8 +133,12 @@ app.get("/logout", auth, async (req, res) => {
     res.status(404).send(e);
   }
 });
-app.get("/about", (req, res) => {
-  res.render("about");
+app.get("/about", aboutauth, (req, res) => {
+  try {
+    res.render("about", { name: req.user.username });
+  } catch (e) {
+    res.render("about");
+  }
 });
 app.post("/register", async (req, res) => {
   try {
