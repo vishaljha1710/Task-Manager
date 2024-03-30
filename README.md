@@ -17,6 +17,9 @@ This is the Readme file for the Task Manager website, a web application built us
 - Delete Tasks: Users can remove tasks from any of the tabs.
 - Remote Storage: User data and task status are stored remotely on MongoDB Atlas.
 
+  ![image](https://github.com/vishaljha1710/Task-Manager/assets/77543816/7328cd12-db11-423d-a358-79820626a6bf)
+
+
 ## Technologies Used
 
 - Node.js: A JavaScript runtime environment for server-side development.
