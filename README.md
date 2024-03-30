@@ -1,5 +1,8 @@
 # Task Manager Website 
 
+![image](https://github.com/vishaljha1710/Task-Manager/assets/77543816/6d2478cd-2611-4883-afdc-f11283ea7aaf)
+
+
 ## Introduction
 
 This is the Readme file for the Task Manager website, a web application built using Node.js, Express.js, and MongoDB. The website allows users to log in and manage their tasks in a user dashboard with tabs for "Tasks," "In-Progress," and "Completed." It uses MongoDB Atlas to store user information and task statuses remotely.
