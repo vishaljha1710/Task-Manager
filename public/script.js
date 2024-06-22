@@ -1,8 +1,11 @@
 
 $(document).ready(function () {
-    
+    // const baseUrl = 'http://localhost:3000';
+    const baseUrl = 'https://task-manager-2-me0w.onrender.com';
 
   $("#add").on("click", function () {
+
+          
 
           var div = $("<div>").addClass("list").attr("draggable", true);
 
@@ -31,7 +34,7 @@ $(document).ready(function () {
         op:0
      }
      $("#input").val("");
-     fetch('http://localhost:3000/dashboard',{
+     fetch(`${baseUrl}/dashboard`,{
         method:'POST',
         headers:{
             'Content-Type':'application/json'
@@ -55,7 +58,7 @@ $(document).ready(function () {
         op: 2
     }
 
-     fetch('http://localhost:3000/dashboard',{
+     fetch(`${baseUrl}/dashboard`,{
         method:'POST',
         headers:{
             'Content-Type':'application/json'
@@ -70,11 +73,11 @@ $(document).ready(function () {
 
 
 
-//to ensure the existing elements have drag and drop feature enabled
-//when the page reload the tasks are loaded from database with just the content
-//the tasks dont have the draganddrop() appended to them
-  dragAndDrop();
-//
+    //to ensure the existing elements have drag and drop feature enabled
+    //when the page reload the tasks are loaded from database with just the content
+    //the tasks dont have the draganddrop() appended to them
+    dragAndDrop();
+    //
 
   function dragAndDrop() {
       $(".list").on("dragstart", function (e) {
@@ -94,7 +97,7 @@ $(document).ready(function () {
                 op:1
              }
         
-             fetch('http://localhost:3000/dashboard',{
+             fetch(`${baseUrl}/dashboard`,{
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'
