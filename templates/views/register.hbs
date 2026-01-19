@@ -1,59 +1,27 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
   {{>navbar}}
-<link rel="stylesheet" href="styles.css">
-<style> input[type="text"]{
-           padding: 10px;
-           margin-bottom: 10px;
-           border: 1px solid #ccc;
-           border-radius: 5px;
-       }
-       .subdiv{
-        width: 90%;
-       }
-       .float-container {
-    padding: 10px;
-}
-input[type="email"],
-input[type="text"],
-       input[type="password"],
-       .custbutton {
-           padding: 10px;
-           margin-bottom: 10px;
-            width: 90%;
-           margin-left: auto;
-           margin-right: auto;
-          
-           border: 1px solid #ccc;
-           border-radius: 5px;
-       }
-       .custbutton{
-        width: 92%;
-       }
+  <div class="rcorners">
 
-.float-child{
-    width: 50%;
-    float: left;
-    padding: 10px;
-}
-
-       </style>
-  </head>
-<body>  <div class="rcorners" >
-  
     <div class="subdiv" id="fade">
-   
-   
-       <br> <h2>Registration</h2><br>
-        <form class="custform" action="/register" method="POST">
-         <div class="float-container">
-            <div class="float-child">
+
+
+      <br>
+      <h2>Registration</h2><br>
+      <form class="custform" action="/register" method="POST">
+        <div class="float-container">
+          <div class="float-child">
             <br><label for="username">Username:</label><br>
             <input type="text" id="username" name="username" required>
 
@@ -61,23 +29,27 @@ input[type="text"],
             <input type="password" id="password" name="password" required>
             <br><label for="password">Confirm Password:</label><br>
             <input type="password" id="confirmpassword" name="confirmpassword" required>
-            </div>
+          </div>
 
-            <div class="float-child">
-             <br><label for="email">Email:</label><br>
-            <input class ="input1" type="email" id="email" name="email" required>
-             <br> <label for="phone">Phone No:</label><br>
-            <input class ="input2" type="text" id="phone" name="phone" required>
+          <div class="float-child">
+            <br><label for="email">Email:</label><br>
+            <input class="input1" type="email" id="email" name="email" required>
+            <br> <label for="phone">Phone No:</label><br>
+            <input class="input2" type="text" id="phone" name="phone" required>
 
             <br><label for="phone">Age: </label><br>
-            <input class ="input3" type="text" id="age" name="age" required> </div>
+            <input class="input3" type="text" id="age" name="age" required>
+          </div>
 
-</div>
-            <br><button class="custbutton" type="submit">Register</button>
-        </form>
+        </div>
+        <br><button class="custbutton" type="submit">Register</button>
+      </form>
     </div>
 
-   </div>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-  </body>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

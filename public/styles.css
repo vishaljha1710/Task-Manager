@@ -1,185 +1,255 @@
 body {
     background-image: url(mountain.jpg);
-
-      margin: 0;
-      padding: 0;
-   
-   
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif; /* Consolidating font family here if possible, though dashboard has it in inline */
 }
-*{
-    font-size: 20px;
-  }
 
-  a {
+/* Global Box Sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Typography */
+a {
     text-decoration: none;
     color: bisque;
 }
+
 a:hover {
-   color: brown;
+    color: brown;
 }
-  .text{
-           position: absolute; /*or fixed*/
-           top: 200px;
-           left: 50px;
-           max-width: 800px;
-          }
-           h1 {
-              font-size: 48px;
-              margin-bottom: 20px;
-          }
-  
-          p {
-              font-size: 28px;
-              line-height: 1.5;
-          }
-          #blackBar{
-            position:fixed;
-            top:0;
-            left:0;
-            width:100%;
-            height:60px;
-            background-color:black;
-         }
-         .navleft,.navright{
-            position: fixed;
-            top:10px;
-            color: white;
-         }
-         .navleft{
-            font-size: 30px;
-            left: 20px;
-         }
-         .navright{
-            font-size: 25px;
-            right: 20px;
-         }
-  .container{
-   width: 100%;
-   min-height: 83vh;
-   display:flex;
-   align-items: center;
-   justify-content: center;
-  }
-  .faded,#fade{
-   background-color: rgba(0,0,0,0.65);
-}
-.subdiv{  border-radius: 25px ;
-   position: absolute;
-   border: 1px solid #313131;
 
-    width: 50%;
- height:90%;
-  text-align: center;
+h1 {
+    font-size: 2.5rem; /* 40px approx */
+    margin-bottom: 20px;
+    color: white; /* from dashboard.hbs inline */
 }
-  #left,#middle,#right{
-  width: 500px;
-  min-height: 500px;
-   border-radius: 10px;
-   margin: 20px;
-  }
-  
-  .list{
-   background-color: white;
-  height: 60px;
-  margin: 30px;
-  color: black;
-  display: flex;
-   align-items: center;
-   border-radius: 7px;
-   font-size: 25px;
-   cursor: grab;
-  }
-  .bulletin{
-   width: 30px;
-   margin-right: 15px;
-   margin-left: 20px;
-  }
-.delete{
-   width: 30px;
-   margin-right: 20px;
-   margin-left: auto;
-   transition: transform .2s;
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: white;
 }
-.delete:hover{
-   transform: scale(1.5);
-   cursor: pointer;
+
+/* Navigation - Keeping custom nav styles if needed, but Bootstrap is primary */
+/* Removing fixed pos navleft/navright as they seem unused or better handled by navbar */
+#blackBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: black;
+    z-index: 1000;
+    display: none; /* Assuming bootstrap navbar replaces this */
 }
-/* Style for the search bar */
+
+/* Landing Page Text */
+.text {
+    position: relative; /* Changed from absolute */
+    padding: 100px 20px 20px 20px; /* Top padding to clear navbar */
+    max-width: 800px;
+    margin: 0 auto;
+    color: white; /* Ensure visibility */
+    text-align: left;
+}
+
+.text h1 {
+    font-size: 3rem;
+}
+
+@media (max-width: 768px) {
+    .text {
+        padding-top: 80px;
+        text-align: center;
+    }
+    .text h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Main Container (Dashboard) */
+.container {
+    width: 100%;
+    min-height: 83vh;
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping */
+    align-items: flex-start; /* Align to top */
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.faded, #fade {
+    background-color: rgba(0, 0, 0, 0.65);
+}
+
+.subdiv {
+    border-radius: 25px;
+    position: relative; /* Changed from absolute */
+    border: 1px solid #313131;
+    width: 100%;
+    max-width: 500px; /* Limit width on desktop */
+    min-height: 500px; /* From #left/#middle etc */
+    padding: 20px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#left, #middle, #right {
+    flex: 1 1 300px; /* Grow, shrink, basis */
+    max-width: 400px;
+    min-height: 500px;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+}
+
+/* Tasks Styles */
+.list {
+    background-color: white;
+    min-height: 60px; /* Changed height to min-height */
+    margin: 15px 0;
+    padding: 10px; /* Added padding */
+    color: black;
+    display: flex;
+    align-items: center;
+    border-radius: 7px;
+    font-size: 1.2rem;
+    cursor: grab;
+    word-break: break-word; /* handle long text */
+}
+
+.bulletin {
+    width: 30px;
+    min-width: 30px;
+    margin-right: 15px;
+}
+
+.delete {
+    width: 30px;
+    min-width: 30px;
+    margin-left: auto;
+    transition: transform .2s;
+}
+
+.delete:hover {
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
+/* Search Bar */
 .search-bar {
-   margin-top: 70px;
-   margin-left: 500px;
-   width: 800px;
-   background-color: rgba(0,0,0,0.65);
-   border: 1px solid #f3a2a2;
-   border-radius: 10px;
-   overflow: hidden; /* Hide overflowing content (e.g., the button) */
-   display: flex;    /* Use flexbox to align input and button horizontally */
+    margin: 80px auto 20px auto; /* Centered, clearer of navbar */
+    width: 90%;
+    max-width: 800px;
+    background-color: rgba(0, 0, 0, 0.65);
+    border: 1px solid #f3a2a2;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
 }
 
-/* Style for the search input */
 .search-bar input {
-   flex: 1; /* Take up remaining space */
-   padding: 10px;
-   color: white;
-
-   background: transparent;
+    flex: 1;
+    padding: 15px;
+    color: white;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
 }
 
-/* Style for the search button */
 .search-bar button {
-   padding: 10px 20px;
-   background-color: #000000;
-   border: 1px solid #f3a2a2;
-   color: white;
-   border: none;
-   cursor: pointer;
-   transition: background-color 0.3s ease;
+    padding: 10px 20px;
+    background-color: #000000;
+    border-left: 1px solid #f3a2a2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
 }
 
-/* Hover effect for the search button */
 .search-bar button:hover {
-   background-color: #ebb2b2;
+    background-color: #ebb2b2;
 }
+
+/* Login/Register Box */
 .rcorners {
-   background-image: url("animebg.jpg");
-   background-size: cover;
- border-radius: 25px;
- padding: 20px;
- width: 1100px;
- height: 700px;
- margin-left: auto;
- margin-right: auto;
- margin-top: 100px;
- position:relative;
+    background-image: url("animebg.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 25px;
+    padding: 40px;
+    width: 90%;
+    max-width: 1100px;
+    min-height: 700px;
+    margin: 100px auto;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
 .form-container {
-           position: relative;
-           margin-left: auto;
-           margin-right: auto;
-           padding: 20px;
-           max-width:80%;
-           border-radius: 10px;
-           
-       }
+    position: relative;
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+    margin: 0 auto;
+}
 
-       /* Style form elements as needed */
-       .custform {
-           display: flex;
-           flex-direction: column ;
-       }
+/* Form Elements */
+.custform {
+    display: flex;
+    flex-direction: column;
+}
 
-      h2, label {
-           color: white;
-           margin-bottom: 10px;
-       }
+h2, label {
+    color: white;
+    margin-bottom: 10px;
+}
 
-       input[type="email"],
-       input[type="password"],
-       .custbutton {
-           padding: 10px;
-           margin-bottom: 10px;
-          
-           border: 1px solid #ccc;
-           border-radius: 5px;
-       }
+input[type="email"],
+input[type="password"],
+input[type="text"],
+.custbutton {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.custbutton {
+    background-color: bisque;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.custbutton:hover {
+    background-color: brown;
+    color: white;
+}
+
+/* Float Container for Register */
+.float-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.float-child {
+    flex: 1 1 200px; /* Grow, shrink, basis */
+    width: 100%;
+}

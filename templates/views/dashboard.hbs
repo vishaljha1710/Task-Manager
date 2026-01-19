@@ -1,56 +1,57 @@
 <!doctype html>
 <html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard</title>
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard</title>
-      <link rel="stylesheet" href="styles.css">
-     {{>navbar name=name }}
-  <style>
-    *{
-      font-family: 'Poppins',sans-serif;
-      box-sizing: border-box;
-    }
-    h1{
-      position: relative;
-      top:20px;
-      text-align: center;
-      font-size: 40px;
-      color: white;
-    }
-</style>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
- <h2></h2>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   </head>
+
 <body>
+  {{>navbar name=name }}
   <div class="search-bar">
-        <input type="text" id="input" placeholder="Add task...">
-        <button type="submit" id="add">Add</button>
+    <input type="text" id="input" placeholder="Add task...">
+    <button type="submit" id="add">Add</button>
+  </div>
+  <div class="container">
+    <div id="left" class="faded">
+      <h1> Tasks <img src="task.png" width="50" height="45"></h1>
+      {{#each user.dashboard}}
+      {{#if (eq this.box "Tasks")}}
+      <div class="list" draggable="true"><img class="bulletin" draggable="false" src="bulletin.png" />{{this.tasks}}<img
+          class="delete" draggable="false" id="delete" src="delete.png" /></div>{{else}}{{/if}}{{/each}}
     </div>
- <div class="container">
- <div id="left" class="faded"><h1> Tasks <img src="task.png"  width="50" height="45"></h1>
- {{#each user.dashboard}}
-{{#if (eq this.box "Tasks")}}
- <div class="list" draggable="true" ><img class="bulletin" draggable="false" src="bulletin.png"/>{{this.tasks}}<img class="delete" draggable="false" id="delete" src="delete.png"/></div>{{else}}{{/if}}{{/each}}
- </div>
- 
- <div id="middle" class="faded"><h1>In Progress <img src="progress.png" width="50" height="45"></h1>{{#each user.dashboard}}
-{{#if (eq this.box "In Progress")}}
- <div class="list" draggable="true" ><img class="bulletin" draggable="false" src="bulletin.png"/>{{this.tasks}}<img class="delete" draggable="false" id="delete" src="delete.png"/></div>{{else}}{{/if}}{{/each}}
- 
- </div>
- <div id="right" class="faded"><h1 id="h1">Completed <img src="completed.png" width="50" height="45"></h1>{{#each user.dashboard}}
-{{#if (eq this.box "Completed")}}
- <div class="list" draggable="true" ><img class="bulletin" draggable="false" src="bulletin.png"/>{{this.tasks}}<img class="delete" draggable="false" id="delete" src="delete.png"/></div>{{else}}{{/if}}{{/each}}
- </div>
- </div>
-<script type="application/json" data-json="user">
+
+    <div id="middle" class="faded">
+      <h1>In Progress <img src="progress.png" width="50" height="45"></h1>{{#each user.dashboard}}
+      {{#if (eq this.box "In Progress")}}
+      <div class="list" draggable="true"><img class="bulletin" draggable="false" src="bulletin.png" />{{this.tasks}}<img
+          class="delete" draggable="false" id="delete" src="delete.png" /></div>{{else}}{{/if}}{{/each}}
+
+    </div>
+    <div id="right" class="faded">
+      <h1 id="h1">Completed <img src="completed.png" width="50" height="45"></h1>{{#each user.dashboard}}
+      {{#if (eq this.box "Completed")}}
+      <div class="list" draggable="true"><img class="bulletin" draggable="false" src="bulletin.png" />{{this.tasks}}<img
+          class="delete" draggable="false" id="delete" src="delete.png" /></div>{{else}}{{/if}}{{/each}}
+    </div>
+  </div>
+  <script type="application/json" data-json="user">
 
 </script>
- <script src="script.js"></script>
- 
-
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
-
-
